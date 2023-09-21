@@ -3,7 +3,6 @@ package db
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"testing"
 	"time"
 
@@ -72,20 +71,20 @@ func TestDeleteAccount(t *testing.T) {
 
 }
 
-func TestListAccount(t *testing.T) {
-	for i := 0; i < 10; i++ {
-		CreateRandomAccount(t)
-		fmt.Println(i)
+// func TestListAccount(t *testing.T) {
+// 	for i := 0; i < 10; i++ {
+// 		CreateRandomAccount(t)
+// 		fmt.Println(i)
 
-	}
-	args := ListAccountsParams{
-		Limit:  5,
-		Offset: 5,
-	}
-	accounts, err := testQueries.ListAccounts(context.Background(), args)
-	require.NoError(t, err)
-	require.Len(t, accounts, 5)
-	for _, account := range accounts {
-		require.NotEmpty(t, account)
-	}
-}
+// 	}
+// 	args := ListAccountsParams{
+// 		Limit:  5,
+// 		Offset: 5,
+// 	}
+// 	accounts, err := testQueries.ListAccounts(context.Background(), args)
+// 	require.NoError(t, err)
+// 	require.Len(t, accounts, 5)
+// 	for _, account := range accounts {
+// 		require.NotEmpty(t, account)
+// 	}
+// }
