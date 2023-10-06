@@ -1,10 +1,10 @@
 postgres:
-	docker run --name postgres121 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:12-alpine
+	docker run --name postgres12 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:12-alpine
 createdb:
-	docker exec -it postgres121 createdb --username=root --owner=root simple_bank
+	docker exec -it postgres12 createdb --username=root --owner=root simple_bank
 
 dropdb:
-	docker exec -it postgres121 dropdb  simple_bank
+	docker exec -it postgres12 dropdb  simple_bank
 
 migrateup:
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose  up
@@ -17,4 +17,10 @@ test:
 	go test -v -cover ./...
 
 .PHONY:postgres createdb dropdb migrateup migratedown sqlc test
+
+
+# $ curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
+# migrate.linux-amd64.tar.gz 	
+
+#sudo docker exec -it postgres12 psql -U root simple_bank
 
