@@ -16,7 +16,11 @@ sqlc:
 test:
 	go test -v -cover ./...
 
-.PHONY:postgres createdb dropdb migrateup migratedown sqlc test
+
+.server:
+	go run main.go
+
+.PHONY:postgres createdb dropdb migrateup migratedown sqlc test server
 
 
 # $ curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
