@@ -1,10 +1,11 @@
 package main
 
 import (
+	"database/sql"
 	"log"
 
 	"github.com/gopheramit/simple_bank/api"
-	db "github.com/gopheramit/simple_bank/db"
+	db "github.com/gopheramit/simple_bank/db/sqlc"
 	_ "github.com/lib/pq"
 )
 
@@ -16,7 +17,7 @@ const (
 
 func main() {
 
-	conn, err := db.Open(dbDriver, dbSource)
+	conn, err := sql.Open(dbDriver, dbSource)
 	if err != nil {
 		log.Fatal("cannot connect to db: ", err)
 	}
