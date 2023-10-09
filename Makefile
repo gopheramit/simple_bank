@@ -12,7 +12,7 @@ migratedown:
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose  down
 
 sqlc:
-	docker run --rm -v C:\Users\amitw\Documents\simplebank:/src -w /src kjconroy/sqlc generate
+	sqlc generate
 test:
 	go test -v -cover ./...
 
@@ -20,7 +20,10 @@ test:
 server:
 	go run main.go
 
-.PHONY:postgres createdb dropdb migrateup migratedown sqlc test server
+mock:
+	mockgen -package mockdb -destination db/mock/store.go github.com/gopheramit/simple_bank/db/sqlc Store
+
+.PHONY:postgres createdb dropdb migrateup migratedown sqlc test server mock
 
 
 # $ curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
