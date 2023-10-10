@@ -16,7 +16,7 @@ sqlc:
 test:
 	go test -v -cover ./...
 
-
+ 
 server:
 	go run main.go
 
@@ -30,4 +30,6 @@ mock:
 # migrate.linux-amd64.tar.gz 	
 
 #sudo docker exec -it postgres12 psql -U root simple_bank
+
+#migrate create -ext sql -dir db/migration -seq add_users
 
